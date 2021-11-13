@@ -1,5 +1,6 @@
 <html>
-<meta charset="utf-8"/>
+<meta charset="utf-8" />
+
 <head>
     <style>
         img {
@@ -16,6 +17,10 @@
     <script type="text/javascript" src="database.js">
     </script>
     <script type="text/javascript">
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
         var father = undefined;
         var mouther = undefined;
         var child = undefined;
@@ -73,6 +78,7 @@
                 cClicked = false;
                 if (iter == (anArray.length)) finish();
                 else {
+                    sleep(2500);
                     addRow(db[anArray[iter]]);
                     iter++;
                 }
