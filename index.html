@@ -1,0 +1,133 @@
+<html>
+<meta charset="utf-8"/>
+<head>
+    <style>
+        img {
+            height: 300px;
+            width: auto;
+        }
+
+        div {
+            font-size: 32;
+            text-transform: uppercase;
+            text-align: center;
+        }
+    </style>
+    <script type="text/javascript" src="database.js">
+    </script>
+    <script type="text/javascript">
+        var father = undefined;
+        var mouther = undefined;
+        var child = undefined;
+
+        var fClicked = false;
+        var mClicked = false;
+        var cClicked = false;
+
+        var anArray = [];
+        for (var i in db) {
+            anArray[anArray.length] = i;
+        }
+
+        var iter = 0;
+        console.log(iter);
+
+        function playFather() {
+            fClicked = true;
+            playAudio(father);
+        }
+
+        function playMouther() {
+            mClicked = true;
+            playAudio(mouther);
+        }
+
+        function playChild() {
+            cClicked = true;
+            playAudio(child);
+        }
+
+        function start() {
+            fClicked = true;
+            mClicked = true;
+            cClicked = true;
+            iter = 0;
+            redrawController();
+        }
+
+        function playAudio(src) {
+            var audio = new Audio();
+            audio.src = src;
+            audio.autoplay = true;
+            redrawController();
+        }
+
+        function finish() {
+            document.getElementsByTagName("table")[0].innerHTML = "<div>КОНЕЦ<\div>"
+        }
+
+        function redrawController() {
+            if (fClicked && mClicked && cClicked) {
+                fClicked = false;
+                mClicked = false;
+                cClicked = false;
+                if (iter == (anArray.length)) finish();
+                else {
+                    addRow(db[anArray[iter]]);
+                    iter++;
+                }
+            }
+        }
+
+        function addRow(animal) {
+            father = animal.father.audio;
+            mouther = animal.mouther.audio;
+            child = animal.child.audio;
+            row = "";
+            row += "<tr>";
+            row += "<td>";
+            row += "<div onclick='playFather()'>";
+            row += "<img src='" + animal.father.img + "'/>";
+            row += "</div>";
+            row += "</td>";
+            row += "<td>";
+            row += "<div onclick='playMouther()'>";
+            row += "<img src='" + animal.mouther.img + "'/>";
+            row += "</div>";
+            row += "</td>";
+            row += "<td>";
+            row += "<div onclick='playChild()'>";
+            row += "<img src='" + animal.child.img + "'/>";
+            row += "</div>";
+            row += "</td>";
+            row += "</tr>";
+            row += "<tr>";
+            row += "<td>";
+            row += "<div onclick='playFather()'>";
+            row += animal.father.name;
+            row += "</div>";
+            row += "</td>";
+            row += "<td>";
+            row += "<div onclick='playMouther()'>";
+            row += animal.mouther.name;
+            row += "</div>";
+            row += "</td>";
+            row += "<td>";
+            row += "<div onclick='playChild()'>";
+            row += animal.child.name;
+            row += "</div>";
+            row += "</td>";
+            row += "</tr>";
+            document.getElementsByTagName("table")[0].innerHTML = row;
+        }
+
+    </script>
+</head>
+
+<body>
+    <div onclick="start()" style="font-size: 32;"> СТАРТ</div>
+    <table>
+    </table>
+</body>
+
+</html>
