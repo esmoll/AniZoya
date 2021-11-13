@@ -20,6 +20,10 @@
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
+        async function delay(ms){
+
+            await sleep(ms);
+        }
 
         var father = undefined;
         var mouther = undefined;
@@ -71,14 +75,14 @@
             document.getElementsByTagName("table")[0].innerHTML = "<div>КОНЕЦ<\div>"
         }
 
-        function redrawController() {
+        async function redrawController() {
             if (fClicked && mClicked && cClicked) {
                 fClicked = false;
                 mClicked = false;
                 cClicked = false;
                 if (iter == (anArray.length)) finish();
                 else {
-                    sleep(2500);
+                    await sleep(800);
                     addRow(db[anArray[iter]]);
                     iter++;
                 }
