@@ -20,7 +20,7 @@
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
-        async function delay(ms){
+        async function delay(ms) {
 
             await sleep(ms);
         }
@@ -37,6 +37,8 @@
         for (var i in db) {
             anArray[anArray.length] = i;
         }
+        mixAnArray();
+
 
         var iter = 0;
         console.log(iter);
@@ -69,6 +71,27 @@
             audio.src = src;
             audio.autoplay = true;
             redrawController();
+        }
+
+        function mixAnArray() {
+            console.log(anArray);
+            let temp;
+            let max = anArray.length - 1;
+            let min = 0;
+            let a;
+            let b;
+            for (let i = 0; i < 100; i++) {
+                a = parseInt(getRandomArbitrary(min, max) + 0.5);
+                b = parseInt(getRandomArbitrary(min, max) + 0.5);
+                temp = anArray[a];
+                anArray[a] = anArray[b];
+                anArray[b] = temp;
+            }
+            console.log(anArray);
+        }
+
+        function getRandomArbitrary(min, max) {
+            return Math.random() * (max - min) + min;
         }
 
         async function finish() {
