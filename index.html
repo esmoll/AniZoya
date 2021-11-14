@@ -71,7 +71,8 @@
             redrawController();
         }
 
-        function finish() {
+        async function finish() {
+            await sleep(1200);
             document.getElementsByTagName("table")[0].innerHTML = "<div>КОНЕЦ<\div>"
         }
 
@@ -82,7 +83,7 @@
                 cClicked = false;
                 if (iter == (anArray.length)) finish();
                 else {
-                    await sleep(1500);
+                    await sleep(1200);
                     addRow(db[anArray[iter]]);
                     iter++;
                 }
