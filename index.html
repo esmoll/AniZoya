@@ -107,6 +107,10 @@
                 if (iter == (anArray.length)) finish();
                 else {
                     await sleep(1200);
+                    document.getElementsByTagName("table")[0].innerHTML = "";
+                    fClicked = false;
+                    mClicked = false;
+                    cClicked = false;
                     addRow(db[anArray[iter]]);
                     iter++;
                 }
